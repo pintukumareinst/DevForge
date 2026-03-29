@@ -1,0 +1,1638 @@
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevForge - Software & Web Development</title>
+    <meta
+      name="description"
+      content="We craft high-performance software, websites, and mobile apps that power modern businesses. From idea to launch."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background: #ffffff;
+        --foreground: #0a0a0a;
+        --card: #ffffff;
+        --primary: #171717;
+        --primary-foreground: #fafafa;
+        --secondary: #f5f5f5;
+        --muted-foreground: #737373;
+        --border: #e5e5e5;
+        --accent: #0284c7;
+        --destructive: #ef4444;
+        --radius: 12px;
+        --container: 1200px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border-color: var(--border);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        background: var(--background);
+        color: var(--foreground);
+        line-height: 1.45;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(var(--container), calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      .section {
+        border-top: 1px solid var(--border);
+      }
+
+      .eyebrow {
+        color: var(--accent);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 5vw, 3.25rem);
+        line-height: 1.1;
+        font-weight: 800;
+        max-width: 800px;
+      }
+
+      .text-primary {
+        color: var(--accent);
+      }
+
+      .muted {
+        color: var(--muted-foreground);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 12px 22px;
+        font-size: 14px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+
+      .btn-outline {
+        border-color: var(--border);
+        background: transparent;
+        color: var(--foreground);
+      }
+
+      .btn-outline:hover {
+        background: var(--secondary);
+      }
+
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        transition: all 0.25s ease;
+      }
+
+      .nav.scrolled {
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 20px;
+      }
+
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--primary);
+        color: var(--primary-foreground);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+      }
+
+      .brand:hover .brand-icon {
+        transform: scale(1.05);
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 28px;
+        align-items: center;
+        color: var(--muted-foreground);
+        font-size: 14px;
+      }
+
+      .nav-links a:hover {
+        color: var(--foreground);
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 14px;
+      }
+
+      .mobile-toggle {
+        display: none;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--background);
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      .mobile-menu {
+        display: none;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        background: var(--background);
+      }
+
+      .mobile-menu.open {
+        display: block;
+      }
+
+      .mobile-menu ul {
+        list-style: none;
+        padding: 20px 0;
+        display: grid;
+        gap: 16px;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding-top: 84px;
+      }
+
+      .hero-grid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(#efefef 1px, transparent 1px),
+          linear-gradient(90deg, #efefef 1px, transparent 1px);
+        background-size: 80px 80px;
+        opacity: 0.75;
+      }
+
+      .hero-glow {
+        pointer-events: none;
+        position: absolute;
+        top: 28%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 620px;
+        height: 620px;
+        border-radius: 50%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(2, 132, 199, 0.12) 0%,
+          transparent 72%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 64px;
+        align-items: center;
+        padding: 56px 0 80px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--secondary);
+        padding: 8px 14px;
+        font-size: 12px;
+        color: var(--muted-foreground);
+        margin-bottom: 26px;
+      }
+
+      .badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 7vw, 4.7rem);
+        line-height: 1.06;
+        font-weight: 800;
+        margin-bottom: 22px;
+        max-width: 15ch;
+      }
+
+      .hero p {
+        max-width: 54ch;
+        color: var(--muted-foreground);
+        font-size: 18px;
+        margin-bottom: 34px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .code-card {
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        background: #111111;
+        color: #f5f5f5;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.16);
+      }
+
+      .terminal-bar {
+        background: #1d1d1d;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid #2f2f2f;
+      }
+
+      .light {
+        width: 11px;
+        height: 11px;
+        border-radius: 999px;
+        display: inline-block;
+      }
+
+      .light.red {
+        background: #ef4444;
+      }
+      .light.yellow {
+        background: #f59e0b;
+      }
+      .light.green {
+        background: #22c55e;
+      }
+
+      .terminal-title {
+        margin-left: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: #a3a3a3;
+      }
+
+      pre {
+        padding: 24px;
+        overflow-x: auto;
+        font-size: 12px;
+        line-height: 1.8;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .primary-code {
+        color: #38bdf8;
+      }
+      .muted-code {
+        color: #a3a3a3;
+      }
+      .success-code {
+        color: #4ade80;
+      }
+
+      .stats {
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(4px);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        padding: 22px 0;
+      }
+
+      .stats-grid strong {
+        display: block;
+        font-size: 32px;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .stats-grid span {
+        font-size: 12px;
+        color: var(--muted-foreground);
+      }
+
+      .section-body {
+        padding: 96px 0;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid var(--border);
+        border-right: none;
+        border-bottom: none;
+        margin-top: 48px;
+      }
+
+      .service-card {
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 30px;
+        transition: background 0.25s ease;
+      }
+
+      .service-card:hover {
+        background: var(--secondary);
+      }
+
+      .service-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--secondary);
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .service-card h3 {
+        font-size: 19px;
+        margin-bottom: 8px;
+      }
+
+      .service-card p {
+        font-size: 14px;
+        color: var(--muted-foreground);
+      }
+
+      .section-top {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+
+      .plain-link {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 14px;
+        color: var(--muted-foreground);
+      }
+
+      .plain-link:hover {
+        color: var(--foreground);
+      }
+
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .project-card {
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        background: var(--card);
+        transition:
+          border-color 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      .project-card:hover {
+        border-color: #7dd3fc;
+        transform: translateY(-2px);
+      }
+
+      .project-image {
+        height: 210px;
+        object-fit: cover;
+        width: 100%;
+        transition: transform 0.35s ease;
+      }
+
+      .project-card:hover .project-image {
+        transform: scale(1.04);
+      }
+
+      .project-content {
+        padding: 22px;
+      }
+
+      .project-tag {
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .project-content h3 {
+        margin: 8px 0;
+        font-size: 22px;
+      }
+
+      .project-content p {
+        color: var(--muted-foreground);
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        font-size: 12px;
+        border-radius: 999px;
+        background: var(--secondary);
+        color: var(--muted-foreground);
+        padding: 5px 10px;
+      }
+
+      .bg-alt {
+        background: var(--secondary);
+      }
+
+      .process-grid {
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
+
+      .step {
+        position: relative;
+      }
+
+      .step-number {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent);
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 14px;
+        line-height: 1;
+      }
+
+      .step h3 {
+        margin-bottom: 8px;
+        font-size: 20px;
+      }
+
+      .step p {
+        font-size: 14px;
+        color: var(--muted-foreground);
+      }
+
+      .testimonial-title {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .testimonial-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--card);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .stars {
+        color: var(--accent);
+        letter-spacing: 2px;
+        font-size: 15px;
+      }
+
+      .testimonial-card p {
+        color: var(--muted-foreground);
+        font-size: 14px;
+        flex: 1;
+      }
+
+      .author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .author-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .author strong {
+        display: block;
+        font-size: 14px;
+      }
+
+      .author span {
+        font-size: 12px;
+        color: var(--muted-foreground);
+      }
+
+      .pricing-subtitle {
+        max-width: 720px;
+        margin: 14px auto 0;
+        color: var(--muted-foreground);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .pricing-grid {
+        margin-top: 42px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .price-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--background);
+        padding: 30px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .price-card.highlight {
+        background: var(--card);
+        border-color: #7dd3fc;
+      }
+
+      .price-badge {
+        position: absolute;
+        top: -11px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent);
+        color: #ffffff;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 12px;
+        white-space: nowrap;
+      }
+
+      .plan-label {
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--muted-foreground);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .price-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .price-period {
+        font-size: 12px;
+        color: var(--muted-foreground);
+        margin-bottom: 5px;
+      }
+
+      .plan-desc {
+        color: var(--muted-foreground);
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+
+      .features {
+        list-style: none;
+        display: grid;
+        gap: 11px;
+        margin-bottom: 24px;
+        flex: 1;
+      }
+
+      .features li {
+        font-size: 14px;
+        color: var(--muted-foreground);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .features li::before {
+        content: "✓";
+        color: var(--accent);
+        font-weight: 700;
+        margin-top: 1px;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: start;
+      }
+
+      .contact-copy p:first-of-type {
+        margin-bottom: 30px;
+      }
+
+      .contact-list {
+        list-style: none;
+        display: grid;
+        gap: 20px;
+      }
+
+      .contact-list label {
+        display: block;
+        color: var(--muted-foreground);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+
+      .contact-list span {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .form-wrap {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--card);
+        padding: 30px;
+      }
+
+      .contact-form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .field label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--muted-foreground);
+        font-weight: 600;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--secondary);
+        padding: 12px 14px;
+        font: inherit;
+        color: var(--foreground);
+      }
+
+      .field textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        outline: 2px solid rgba(2, 132, 199, 0.22);
+        outline-offset: 1px;
+        border-color: #7dd3fc;
+      }
+
+      .form-success {
+        min-height: 260px;
+        display: none;
+        place-items: center;
+        text-align: center;
+        gap: 12px;
+      }
+
+      .form-success.show {
+        display: grid;
+      }
+
+      .send-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(2, 132, 199, 0.14);
+        color: var(--accent);
+        font-size: 22px;
+      }
+
+      .footer {
+        background: var(--secondary);
+        border-top: 1px solid var(--border);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 36px;
+        padding: 62px 0 42px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .footer-brand p {
+        max-width: 34ch;
+        font-size: 14px;
+        color: var(--muted-foreground);
+        margin-top: 12px;
+      }
+
+      .socials {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .social-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted-foreground);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .social-btn:hover {
+        color: var(--foreground);
+        border-color: #a3a3a3;
+      }
+
+      .footer h4 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted-foreground);
+        margin-bottom: 13px;
+      }
+
+      .footer ul {
+        list-style: none;
+        display: grid;
+        gap: 9px;
+      }
+
+      .footer li a {
+        font-size: 14px;
+        color: var(--muted-foreground);
+      }
+
+      .footer li a:hover {
+        color: var(--foreground);
+      }
+
+      .footer-bottom {
+        padding: 18px 0 28px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 12px;
+        color: var(--muted-foreground);
+      }
+
+      @media (max-width: 1024px) {
+        .hero-content,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .code-card {
+          max-width: 700px;
+        }
+
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .process-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .testimonials-grid,
+        .pricing-grid,
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 780px) {
+        .container {
+          width: min(var(--container), calc(100% - 32px));
+        }
+
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .hero-content {
+          gap: 34px;
+          padding-top: 36px;
+        }
+
+        .stats-grid,
+        .services-grid,
+        .work-grid,
+        .process-grid,
+        .testimonials-grid,
+        .pricing-grid,
+        .footer-grid,
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .section-body {
+          padding: 72px 0;
+        }
+
+        .section-top {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .footer-grid {
+          padding-top: 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav" id="site-nav">
+      <div class="container nav-inner">
+        <a href="#" class="brand" aria-label="DevForge home">
+          <span class="brand-icon">&lt;/&gt;</span>
+          <span>DevForge</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+
+        <div class="nav-cta">
+          <a class="muted" href="#contact">Log in</a>
+          <a class="btn btn-primary" href="#contact">Get a Quote</a>
+        </div>
+
+        <button
+          class="mobile-toggle"
+          id="menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobile-menu">
+        <div class="container">
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a class="btn btn-primary" href="#contact">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+
+        <div class="container hero-content">
+          <div>
+            <div class="badge">
+              <span class="badge-dot"></span>
+              <span>Now accepting projects for Q2 2026</span>
+            </div>
+
+            <h1>
+              We build software
+              <span class="text-primary">that scales</span> your business.
+            </h1>
+
+            <p>
+              From sleek landing pages to enterprise-grade platforms, DevForge
+              delivers end-to-end development with speed, precision, and craft.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">Start a Project →</a>
+              <a class="btn btn-outline" href="#work">View Our Work ▶</a>
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="terminal-bar">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+              <span class="terminal-title">devforge/app - zsh</span>
+            </div>
+            <pre><span class="muted-code">$ </span><span class="primary-code">npx</span> create-devforge-app my-project
+<span class="muted-code">✔ Scaffolding project...
+✔ Installing dependencies...
+✔ Configuring CI/CD pipeline...
+✔ Setting up database schema...</span>
+<span class="success-code">✓ Project ready in 2.4s
+</span>
+<span class="muted-code">$ </span><span class="primary-code">cd</span> my-project &amp;&amp; <span class="primary-code">npm run dev</span>
+<span class="muted-code">  ▲ DevForge v4.2.0
+  - Local: </span><span class="primary-code">http://localhost:3000</span>
+<span class="success-code">  ✓ Ready </span><span class="muted-code">in 312ms</span>
+</pre>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="container stats-grid">
+            <div><strong>200+</strong><span>Projects shipped</span></div>
+            <div><strong>98%</strong><span>Client satisfaction</span></div>
+            <div><strong>50ms</strong><span>Avg. load time</span></div>
+            <div><strong>8yrs</strong><span>In the industry</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container section-body">
+          <p class="eyebrow">What We Do</p>
+          <h2 class="section-title">
+            Full-spectrum development,
+            <span class="text-primary">start to finish.</span>
+          </h2>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <span class="service-icon">🌐</span>
+              <h3>Web Development</h3>
+              <p>
+                Blazing-fast, SEO-optimized websites and web apps built with
+                Next.js, React, and modern tooling.
+              </p>
+            </article>
+            <article class="service-card">
+              <span class="service-icon">📱</span>
+              <h3>Mobile Apps</h3>
+              <p>
+                Cross-platform iOS and Android applications with React Native,
+                one codebase with native performance.
+              </p>
+            </article>
+            <article class="service-card">
+              <span class="service-icon">🎯</span>
+              <h3>UI/UX Design</h3>
+              <p>
+                User-centric interfaces crafted in Figma with design systems
+                that translate pixel-perfect to code.
+              </p>
+            </article>
+            <article class="service-card">
+              <span class="service-icon">⚙</span>
+              <h3>Backend &amp; APIs</h3>
+              <p>
+                Scalable REST and GraphQL APIs, microservices, and cloud
+                infrastructure built for growth.
+              </p>
+            </article>
+            <article class="service-card">
+              <span class="service-icon">🛡</span>
+              <h3>Security &amp; DevOps</h3>
+              <p>
+                CI/CD pipelines, container orchestration, and hardened security
+                audits for production-ready software.
+              </p>
+            </article>
+            <article class="service-card">
+              <span class="service-icon">📈</span>
+              <h3>Analytics &amp; SEO</h3>
+              <p>
+                Data-driven insights, Core Web Vitals optimization, and organic
+                growth strategy baked in from day one.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="work">
+        <div class="container section-body">
+          <div class="section-top">
+            <div>
+              <p class="eyebrow">Case Studies</p>
+              <h2 class="section-title">
+                Work we are <span class="text-primary">proud of.</span>
+              </h2>
+            </div>
+            <a class="plain-link" href="#contact">View all projects ↗</a>
+          </div>
+
+          <div class="work-grid">
+            <article class="project-card">
+              <img
+                class="project-image"
+                src="https://placehold.co/600x400?text=Nexus+Analytics+dark+modern+SaaS+dashboard+with+charts+and+data+visualizations"
+                alt="Nexus Analytics SaaS platform showing a dark modern dashboard with real-time charts and data visualizations"
+              />
+              <div class="project-content">
+                <span class="project-tag">SaaS Platform</span>
+                <h3>Nexus Analytics</h3>
+                <p>
+                  Real-time data dashboard for enterprise teams with custom
+                  reporting and AI-driven insights.
+                </p>
+                <div class="chip-row">
+                  <span class="chip">Next.js</span
+                  ><span class="chip">TypeScript</span
+                  ><span class="chip">PostgreSQL</span
+                  ><span class="chip">Redis</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img
+                class="project-image"
+                src="https://placehold.co/600x400?text=Luminary+Store+sleek+ecommerce+product+page+with+3D+viewer+and+dark+theme"
+                alt="Luminary Store e-commerce website showing a sleek product page with 3D product viewer and dark aesthetic"
+              />
+              <div class="project-content">
+                <span class="project-tag">E-Commerce</span>
+                <h3>Luminary Store</h3>
+                <p>
+                  High-conversion storefront with headless commerce, 3D product
+                  views, and sub-second load times.
+                </p>
+                <div class="chip-row">
+                  <span class="chip">React</span
+                  ><span class="chip">Shopify</span
+                  ><span class="chip">Three.js</span
+                  ><span class="chip">Vercel</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img
+                class="project-image"
+                src="https://placehold.co/600x400?text=PulseHealth+mobile+app+with+health+metrics+graphs+and+clean+dark+UI"
+                alt="PulseHealth mobile application displaying health metrics, graphs, and a clean dark user interface"
+              />
+              <div class="project-content">
+                <span class="project-tag">Mobile App</span>
+                <h3>PulseHealth</h3>
+                <p>
+                  Cross-platform health tracking app with wearable integrations
+                  and personalized coaching AI.
+                </p>
+                <div class="chip-row">
+                  <span class="chip">React Native</span
+                  ><span class="chip">GraphQL</span
+                  ><span class="chip">Node.js</span
+                  ><span class="chip">AWS</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img
+                class="project-image"
+                src="https://placehold.co/600x400?text=BuildSync+construction+project+management+platform+with+timeline+and+task+board"
+                alt="BuildSync construction management platform showing project timelines, task boards, and contractor dashboards"
+              />
+              <div class="project-content">
+                <span class="project-tag">Web Platform</span>
+                <h3>BuildSync</h3>
+                <p>
+                  Construction project management platform streamlining bids,
+                  timelines, and contractor communications.
+                </p>
+                <div class="chip-row">
+                  <span class="chip">Vue.js</span
+                  ><span class="chip">Django</span
+                  ><span class="chip">Postgres</span
+                  ><span class="chip">Docker</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section bg-alt" id="process">
+        <div class="container section-body">
+          <p class="eyebrow">How We Work</p>
+          <h2 class="section-title">
+            From idea to launch,
+            <span class="text-primary">a proven process.</span>
+          </h2>
+
+          <div class="process-grid">
+            <article class="step">
+              <div class="step-number">01</div>
+              <h3>Discovery</h3>
+              <p>
+                We deep-dive into your goals, users, and competitive landscape.
+                You get a clear scope, timeline, and roadmap.
+              </p>
+            </article>
+            <article class="step">
+              <div class="step-number">02</div>
+              <h3>Design</h3>
+              <p>
+                Our designers craft wireframes and high-fidelity prototypes
+                where usability and aesthetics work together.
+              </p>
+            </article>
+            <article class="step">
+              <div class="step-number">03</div>
+              <h3>Build</h3>
+              <p>
+                Engineers write clean, tested, documented code using modern
+                stacks, with weekly demos throughout.
+              </p>
+            </article>
+            <article class="step">
+              <div class="step-number">04</div>
+              <h3>Launch &amp; Scale</h3>
+              <p>
+                We deploy to production with zero downtime, monitor performance,
+                and iterate based on real user data.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container section-body">
+          <div class="testimonial-title">
+            <p class="eyebrow">Client Voices</p>
+            <h2 class="section-title">
+              Trusted by founders
+              <span class="text-primary">and engineering teams.</span>
+            </h2>
+          </div>
+
+          <div class="testimonials-grid">
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                "DevForge rebuilt our entire platform from scratch in 12 weeks.
+                The new site loads 4x faster and our conversion rate jumped 38%
+                in the first month."
+              </p>
+              <div class="author">
+                <span class="author-badge">SM</span>
+                <div>
+                  <strong>Sarah Mitchell</strong
+                  ><span>CEO, Luminary Commerce</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                "The team did not just write code, they thought deeply about our
+                users and proposed improvements we had not even considered. True
+                partners."
+              </p>
+              <div class="author">
+                <span class="author-badge">JO</span>
+                <div>
+                  <strong>James Okafor</strong><span>CTO, BuildSync</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                "From discovery to launch in 6 weeks. The quality of work is
+                exceptional and communication was crystal clear throughout.
+                Highly recommend."
+              </p>
+              <div class="author">
+                <span class="author-badge">PN</span>
+                <div>
+                  <strong>Priya Nair</strong><span>Founder, PulseHealth</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section bg-alt" id="pricing">
+        <div class="container section-body">
+          <div class="testimonial-title">
+            <p class="eyebrow">Transparent Pricing</p>
+            <h2 class="section-title">
+              Simple plans. <span class="text-primary">No surprises.</span>
+            </h2>
+            <p class="pricing-subtitle">
+              Every plan includes a dedicated project manager, weekly check-ins,
+              and a detailed handoff. No hidden fees.
+            </p>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="price-card">
+              <p class="plan-label">Starter</p>
+              <div class="price-row">
+                <span class="price">$4,999</span
+                ><span class="price-period">one-time</span>
+              </div>
+              <p class="plan-desc">
+                Perfect for startups and small businesses needing a professional
+                web presence.
+              </p>
+              <ul class="features">
+                <li>Up to 8 pages</li>
+                <li>Responsive design</li>
+                <li>CMS integration</li>
+                <li>Basic SEO setup</li>
+                <li>2 rounds of revisions</li>
+                <li>30-day post-launch support</li>
+              </ul>
+              <a class="btn btn-outline" href="#contact">Get Started</a>
+            </article>
+
+            <article class="price-card highlight">
+              <span class="price-badge">Most Popular</span>
+              <p class="plan-label">Growth</p>
+              <div class="price-row">
+                <span class="price">$14,999</span
+                ><span class="price-period">one-time</span>
+              </div>
+              <p class="plan-desc">
+                For growing companies that need a scalable platform with custom
+                functionality.
+              </p>
+              <ul class="features">
+                <li>Unlimited pages</li>
+                <li>Custom web application</li>
+                <li>API and third-party integrations</li>
+                <li>Advanced SEO and Analytics</li>
+                <li>Performance optimization</li>
+                <li>5 rounds of revisions</li>
+                <li>90-day post-launch support</li>
+              </ul>
+              <a class="btn btn-primary" href="#contact">Most Popular</a>
+            </article>
+
+            <article class="price-card">
+              <p class="plan-label">Enterprise</p>
+              <div class="price-row">
+                <span class="price">Custom</span
+                ><span class="price-period">per project</span>
+              </div>
+              <p class="plan-desc">
+                Full-cycle development for complex platforms, mobile apps, and
+                ongoing partnerships.
+              </p>
+              <ul class="features">
+                <li>Everything in Growth</li>
+                <li>Mobile app development</li>
+                <li>Dedicated engineering team</li>
+                <li>Architecture consulting</li>
+                <li>SLA-backed uptime</li>
+                <li>Unlimited revisions</li>
+                <li>Priority 24/7 support</li>
+              </ul>
+              <a class="btn btn-outline" href="#contact">Contact Us</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container section-body contact-grid">
+          <div class="contact-copy">
+            <p class="eyebrow">Get In Touch</p>
+            <h2 class="section-title">
+              Ready to build <span class="text-primary">something great?</span>
+            </h2>
+            <p class="muted">
+              Tell us about your project and we will get back to you within 24
+              hours with a detailed proposal and next steps.
+            </p>
+
+            <ul class="contact-list">
+              <li><label>Email</label><span>hello@devforge.dev</span></li>
+              <li><label>Phone</label><span>+1 (555) 012-3456</span></li>
+              <li>
+                <label>Office</label
+                ><span>San Francisco, CA · Remote-first</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-wrap">
+            <form id="contact-form" class="contact-form">
+              <div class="form-row">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Jane Smith"
+                  />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="jane@company.com"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label for="budget">Estimated Budget</label>
+                <select id="budget" name="budget">
+                  <option value="">Select a range</option>
+                  <option value="under5k">Under $5,000</option>
+                  <option value="5-15k">$5,000 - $15,000</option>
+                  <option value="15-50k">$15,000 - $50,000</option>
+                  <option value="50k+">$50,000+</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="message">Project Details</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder="Tell us about your project, timeline, and goals..."
+                ></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">
+                Send Message ✈
+              </button>
+            </form>
+
+            <div id="form-success" class="form-success" aria-live="polite">
+              <span class="send-icon">✉</span>
+              <h3>Message received!</h3>
+              <p class="muted">
+                We will be in touch within 24 hours. Talk soon!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="#" class="brand" aria-label="DevForge home">
+              <span class="brand-icon">&lt;/&gt;</span>
+              <span>DevForge</span>
+            </a>
+            <p>
+              We design and build exceptional digital products for ambitious
+              companies worldwide.
+            </p>
+            <div class="socials">
+              <a href="#" class="social-btn" aria-label="GitHub">GH</a>
+              <a href="#" class="social-btn" aria-label="Twitter">X</a>
+              <a href="#" class="social-btn" aria-label="LinkedIn">IN</a>
+            </div>
+          </div>
+
+          <div>
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#services">Web Development</a></li>
+              <li><a href="#services">Mobile Apps</a></li>
+              <li><a href="#services">UI/UX Design</a></li>
+              <li><a href="#services">Backend &amp; APIs</a></li>
+              <li><a href="#services">DevOps</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#work">Case Studies</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p id="copyright"></p>
+          <p>Crafted with precision · San Francisco, CA</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var nav = document.getElementById("site-nav");
+        var menuToggle = document.getElementById("menu-toggle");
+        var mobileMenu = document.getElementById("mobile-menu");
+        var contactForm = document.getElementById("contact-form");
+        var formSuccess = document.getElementById("form-success");
+        var copyright = document.getElementById("copyright");
+        var mobileLinks = mobileMenu.querySelectorAll("a");
+
+        function updateScrollState() {
+          if (window.scrollY > 20) {
+            nav.classList.add("scrolled");
+          } else {
+            nav.classList.remove("scrolled");
+          }
+        }
+
+        function toggleMenu() {
+          var isOpen = mobileMenu.classList.toggle("open");
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+          menuToggle.textContent = isOpen ? "✕" : "☰";
+        }
+
+        menuToggle.addEventListener("click", toggleMenu);
+        mobileLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            if (mobileMenu.classList.contains("open")) {
+              toggleMenu();
+            }
+          });
+        });
+
+        window.addEventListener("scroll", updateScrollState, { passive: true });
+        updateScrollState();
+
+        contactForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          contactForm.style.display = "none";
+          formSuccess.classList.add("show");
+        });
+
+        copyright.textContent =
+          "© " + new Date().getFullYear() + " DevForge. All rights reserved.";
+      })();
+    </script>
+  </body>
+</html>
